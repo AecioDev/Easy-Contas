@@ -4,7 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Layout } from "@/components/layout/layout";
-import LancamentosPage from "./lancamentos/page";
+import Dashboard from "./dashboard/page";
 
 export default function HomePage() {
   const { user, isAuthenticated } = useAuth();
@@ -52,7 +52,7 @@ export default function HomePage() {
 
   return (
     <Layout>
-      <LancamentosPage />
+      <Dashboard />
     </Layout>
   );
 }
