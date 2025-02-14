@@ -76,7 +76,7 @@ export default function TransactionCard({
             {percentage}%
           </span>
         </div>
-        <span className="truncate leading-none text-gray-500">
+        <span className="leading-none text-gray-500">
           {increased ? "Increased" : "Decreased"}&nbsp; last month
         </span>
       </div>
