@@ -1,13 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CircleDollarSign, Lightbulb, PlusIcon } from "lucide-react";
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -15,6 +14,14 @@ export default function LoginPage() {
   const [password, setPassword] = useState("admin123");
   const router = useRouter();
   const [error, setError] = useState("");
+
+  const handleCadastro = () => {
+    redirect("/signup");
+  };
+
+  const handleLembrar = () => {
+    alert("Chama Lembrar...");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,70 +35,65 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="grid h-full grid-cols-2">
-      {/* ESQUERDA */}
-      <div className="relative h-full w-full">
-        <Image
-          src="/logo_maior_SF.png"
-          alt="Faça Login"
-          fill
-          className="object-cover"
-        />
+    <div className="flex flex-col items-center justify-center h-full bg-gray-950 min-h-screen">
+      <div className="flex items-center justify-center text-4xl text-white mb-4">
+        <CircleDollarSign size={32} className="mr-2" />
+        <h1 className="font-bold">Minhas Contas</h1>
       </div>
-
-      {/* DIREITA */}
-      <div className="min-h-screen flex items-center justify-center">
-        <Card className="w-full max-w-md">
-          <CardHeader>
-            <div className="flex items-center justify-center">
-              <Image
-                src="/logo_login_sf.png"
-                width={173}
-                height={35}
-                alt="Finance AI"
-                className="mb-4 w-full"
-              />
-            </div>
-            <CardTitle className="text-2xl text-orange-400 font-bold text-center">
-              Acesso
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Label className="text-xl text-orange-400" htmlFor="email">
-                  E-mail
-                </Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="seu@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-xl text-orange-400" htmlFor="password">
-                  Senha
-                </Label>
-                <Input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-              <Button
-                type="submit"
-                className="w-full mt-4 bg-orange-400 font-semibold text-xl text-yellow-200 hover:bg-orange-500 hover:text-yellow-100 transition-all duration-300"
-              >
-                Entrar
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
+      <div className="w-full max-w-sm bg-transparent border rounded-lg p-4">
+        <div>
+          <h1 className="text-2xl text-white font-bold text-center">Acessar</h1>
+        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label className="text-lg text-input" htmlFor="email">
+              E-mail
+            </Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="seu@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="text-input"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label className="text-lg text-input" htmlFor="password">
+              Senha
+            </Label>
+            <Input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="text-input"
+            />
+          </div>
+          <Button type="submit" className="w-full mt-4font-semibold text-xl">
+            Entrar
+          </Button>
+        </form>
+        <div className="flex justify-between mt-2">
+          <Button
+            variant="link"
+            className="text-muted font-bold"
+            onClick={() => handleLembrar()}
+          >
+            <Lightbulb />
+            Lembrar-me
+          </Button>
+          <Button
+            variant="link"
+            className="text-muted font-bold"
+            onClick={() => handleCadastro()}
+          >
+            <PlusIcon />
+            Cadastrar
+          </Button>
+        </div>
       </div>
     </div>
   );
