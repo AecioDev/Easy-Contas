@@ -35,20 +35,20 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full bg-gray-950 min-h-screen">
-      <div className="flex items-center justify-center text-4xl text-white mb-4">
+    <div className="flex flex-col items-center justify-center h-full bg-background min-h-screen">
+      <div className="flex items-center justify-center text-4xl text-primary mb-4">
         <CircleDollarSign size={32} className="mr-2" />
         <h1 className="font-bold">Minhas Contas</h1>
       </div>
-      <div className="w-full max-w-sm bg-transparent border rounded-lg p-4">
+      <div className="w-full max-w-sm bg-transparent border border-border rounded-lg p-4">
         <div>
-          <h1 className="text-2xl text-white font-bold text-center">Acessar</h1>
+          <h1 className="text-2xl text-primary font-bold text-center">
+            Acesso
+          </h1>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label className="text-lg text-input" htmlFor="email">
-              E-mail
-            </Label>
+            <Label htmlFor="email">E-mail</Label>
             <Input
               id="email"
               type="email"
@@ -56,30 +56,26 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="text-input"
             />
           </div>
           <div className="space-y-2">
-            <Label className="text-lg text-input" htmlFor="password">
-              Senha
-            </Label>
+            <Label htmlFor="password">Senha</Label>
             <Input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="text-input"
             />
           </div>
-          <Button type="submit" className="w-full mt-4font-semibold text-xl">
+          <Button type="submit" className="w-full">
             Entrar
           </Button>
         </form>
         <div className="flex justify-between mt-2">
           <Button
             variant="link"
-            className="text-muted font-bold"
+            className="text-primary font-bold"
             onClick={() => handleLembrar()}
           >
             <Lightbulb />
@@ -87,7 +83,7 @@ export default function LoginPage() {
           </Button>
           <Button
             variant="link"
-            className="text-muted font-bold"
+            className="text-primary font-bold"
             onClick={() => handleCadastro()}
           >
             <PlusIcon />
