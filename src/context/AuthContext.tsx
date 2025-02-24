@@ -11,10 +11,11 @@ import { useRouter } from "next/navigation";
 import {
   login as loginService,
   logout as logoutService,
-} from "@/services/authService";
+} from "@/services/auth-service";
 import { jwtDecode } from "jwt-decode";
+import { LoginBody } from "@/services/auth-schema";
 
-interface User {
+interface UserStored {
   id: string;
   name: string;
   email: string;
@@ -22,8 +23,8 @@ interface User {
 }
 
 interface AuthContextProps {
-  user: User | null;
-  login: (email: string, password: string) => Promise<void>;
+  user: UserStored | null;
+  login: (creds: LoginBody) => Promise<void>;
   logout: () => void;
   isAuthenticated: boolean;
 }
@@ -31,14 +32,14 @@ interface AuthContextProps {
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserStored | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       try {
-        const decodedToken: User = jwtDecode(token);
+        const decodedToken: UserStored = jwtDecode(token);
         setUser({
           id: decodedToken.id,
           name: decodedToken.name,
@@ -52,8 +53,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const login = async (email: string, password: string) => {
-    const { token, user } = await loginService(email, password);
+  const login = async (creds: LoginBody) => {
+    const { token, user } = await loginService(creds);
     localStorage.setItem("token", token);
     setUser(user);
     router.push("/"); // Redireciona para a página inicial

@@ -3,6 +3,7 @@ import { Mulish } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { Toaster } from "@/components/ui/sonner";
 
 const mulish = Mulish({
   subsets: ["latin-ext"],
@@ -28,6 +29,7 @@ export default function RootLayout({
             </div>
           </ThemeProvider>
         </AuthProvider>
+        <Toaster />
       </body>
     </html>
   );

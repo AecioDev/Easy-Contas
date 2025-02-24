@@ -6,12 +6,6 @@ import Dashboard from "../dashboard/page";
 import LoginPage from "../login/page";
 import { redirect } from "next/navigation";
 
-// export default function HomePage() {
-//   const { user, isAuthenticated } = useAuth();
-//   console.log(user);
-//   return <Layout>{!isAuthenticated ? <LoginPage /> : <Dashboard />}</Layout>;
-// }
-
 export default function HomePage() {
   const { user, isAuthenticated } = useAuth();
 
